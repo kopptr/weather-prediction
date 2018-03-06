@@ -1,0 +1,18 @@
+---
+platform: linux
+image_resource:
+  type: docker-image
+  source: {repository: julia}
+
+inputs:
+  - name: raw-weather-data
+  - name: weather-prediction
+
+params:
+  - LAT:
+  - LON:
+  - NCITIES:
+  - API_KEY:
+
+run:
+  path: weather-prediction/scrape/scrape.jl

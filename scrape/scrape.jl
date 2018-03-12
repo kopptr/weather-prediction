@@ -1,7 +1,7 @@
 # scrape.jl
-ENV["JULIA_PKGDIR"] = "julia-weather-prediction/scrape"
-Pkg.init()
-Pkg.resolve()
+
+Pkg.add("Requests")
+Pkg.add("JSON")
 
 # expects a directory raw-weather-data/ to exist as a git repository
 # clones raw-weather-data/ to raw-weather-data-update/

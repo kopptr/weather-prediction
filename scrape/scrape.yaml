@@ -15,4 +15,7 @@ params:
   - API_KEY:
 
 run:
-  path: weather-prediction/scrape/scrape.jl
+  path: sh
+  args:
+     - '-c'
+     - 'julia weather-prediction/scrape/scrape.jl'

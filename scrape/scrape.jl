@@ -1,3 +1,11 @@
+# scrape.jl
+ENV["JULIA_PKGDIR"] = "julia-weather-prediction/scrape"
+Pkg.resolve()
+
+# expects a directory raw-weather-data/ to exist as a git repository
+# clones raw-weather-data/ to raw-weather-data-update/
+# updates the raw-weather-data-update repository and
+
 using Requests
 using JSON
 
@@ -7,7 +15,7 @@ n_cities = ENV["N_CITIES"]
 api_key = ENV["API_KEY"]
 
 in_data_file = "raw-weather-data/$(lat)-$(lon)-$(n_cities).json"
-out_data_file = "raw-weather-data/$(lat)-$(lon)-$(n_cities).json"
+out_data_file = "raw-weather-data-updated-(lat)-$(lon)-$(n_cities).json"
 
 # Using an indent reduces the diff size,
 # so git stores the data more efficiently

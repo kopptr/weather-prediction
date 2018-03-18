@@ -2,7 +2,7 @@
 platform: linux
 image_resource:
   type: docker-image
-  source: {repository: julialang/julia}
+  source: {repository: kopptr/weather-prediction}
 
 inputs:
   - name: raw-weather-data

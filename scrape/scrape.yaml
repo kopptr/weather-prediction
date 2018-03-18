@@ -18,4 +18,4 @@ run:
   path: sh
   args:
      - '-c'
-     - 'julia weather-prediction/scrape/scrape.jl'
+     - '/opt/julia/bin/julia weather-prediction/scrape/scrape.jl'

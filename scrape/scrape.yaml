@@ -15,7 +15,6 @@ params:
   - API_KEY:
 
 run:
-  path: sh
+  path: julia
   args:
-     - '-c'
-     - '/opt/julia/bin/julia weather-prediction/scrape/scrape.jl'
+     - 'weather-prediction/scrape/scrape.jl'

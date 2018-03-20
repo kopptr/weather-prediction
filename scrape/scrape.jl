@@ -51,5 +51,5 @@ open(data_file, "w") do f
 end
 
 cd(data_git_dir)
-run(`git add .`)
+run(`git add $(filename)`)
 run(`git commit -m "Scrape. Auto-commit"`)

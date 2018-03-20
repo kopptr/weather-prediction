@@ -8,6 +8,9 @@ inputs:
   - name: raw-weather-data
   - name: weather-prediction
 
+outputs:
+  - name: raw-weather-data
+
 params:
   - LAT:
   - LON:

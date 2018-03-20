@@ -1,0 +1,45 @@
+---
+resources:
+   - name: weather-prediction-scrape
+     type: git
+     source:
+        branch: master
+        uri: https://github.com/kopptr/weather-prediction.git
+        paths:
+          - scrape
+
+   - name: raw-weather-data
+     type: git
+     source:
+        branch: master
+        uri: ssh://git@git.trkopp.com:8022/kopptr/openweathermap-data.git
+        private_key: ((raw-weather-key))
+
+   - name: hourly-timer
+     type: time
+     source:
+       interval: 1h
+
+jobs:
+  - name: scrape-weather
+    serial: true
+    plan:
+      - aggregate:
+         - get: hourly-timer
+           trigger: true
+         - get: raw-weather-data
+           trigger: false
+         - get: weather-prediction-scrape
+           trigger: false
+      - task: scrape
+        file: weather-prediction-scrape/scrape/scrape.yaml
+        input_mapping: {weather-prediction: weather-prediction-scrape}
+        params:
+          LAT: 40.7128
+          LON: 74.0060
+          N_CITIES: 10
+          API_KEY: ((weather-api-key))
+      - put: raw-weather-data
+        params:
+          repository: raw-weather-data-out/repo
+          

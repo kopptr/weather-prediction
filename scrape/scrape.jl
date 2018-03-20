@@ -51,5 +51,7 @@ open(data_file, "w") do f
 end
 
 cd(data_git_dir)
+run(`git config --global user.email "tkopp@pivotal.io"`)
+run(`git config --global user.name "Tim Kopp via Concourse"`)
 run(`git add $(filename)`)
 run(`git commit -m "Scrape. Auto-commit"`)

@@ -13,6 +13,7 @@ n_cities = ENV["N_CITIES"]
 api_key = ENV["API_KEY"]
 
 data_git_dir = "raw-weather-data"
+out_dir = "raw-weather-data-out"
 filename = "$(lat)-$(lon)-$(n_cities).json"
 
 data_file = "$(data_git_dir)/$(filename)"
@@ -50,8 +51,11 @@ open(data_file, "w") do f
     JSON.print(f, weather_data, indent)
 end
 
+path = pwd()
 cd(data_git_dir)
 run(`git config --global user.email "tkopp@pivotal.io"`)
 run(`git config --global user.name "Tim Kopp via Concourse"`)
 run(`git add $(filename)`)
 run(`git commit -m "Scrape. Auto-commit"`)
+cd(path)
+mv(data_git_dir, out_dir)

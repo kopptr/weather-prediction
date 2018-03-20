@@ -9,7 +9,7 @@ inputs:
   - name: weather-prediction
 
 outputs:
-  - name: raw-weather-data
+  - name: raw-weather-data-out
 
 params:
   - LAT:

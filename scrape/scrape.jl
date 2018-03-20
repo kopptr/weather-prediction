@@ -12,8 +12,10 @@ lon = ENV["LON"]
 n_cities = ENV["N_CITIES"]
 api_key = ENV["API_KEY"]
 
-in_data_file = "raw-weather-data/$(lat)-$(lon)-$(n_cities).json"
-out_data_file = "raw-weather-data-updated-$(lat)-$(lon)-$(n_cities).json"
+data_git_dir = "raw-weather-data"
+filename = "$(lat)-$(lon)-$(n_cities).json"
+
+data_file = "$(data_git_dir)/$(filename)"
 
 # Using an indent reduces the diff size,
 # so git stores the data more efficiently
@@ -44,6 +46,10 @@ end
 
 append!(weather_data, json_response["list"])
 
-open(out_data_file, "w") do f
+open(data_file, "w") do f
     JSON.print(f, weather_data, indent)
 end
+
+cd(data_git_dir)
+run(`git add .`)
+run(`git commit -m "Scrape. Auto-commit"`)
